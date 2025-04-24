@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إجازة أم القرى</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      font-family: 'Tajawal', sans-serif;
+      padding-top: 100px;
+    }
+    h1 { font-size: 24px; margin-bottom: 20px; }
+    #countdown {
+      font-size: 22px;
+      color: #ff4444;
+      margin-bottom: 40px;
+    }
+    .footer {
+      margin-top: 50px;
+      font-size: 16px;
+      color: #ccc;
+    }
+    a {
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4fc3f7;
+      color: black;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>متبقي على إجازة جامعة أم القرى (1 محرم 1447هـ)</h1>
+  <div id="countdown"></div>
+
+  <p>لا تنسونا من دعائكم<br>
+  <a href="https://reach.link/engjawad" target="_blank">صفحتي على السوشال ميديا</a></p>
+
+  <div class="footer">
+    أذكار:<br>
+    أستغفر الله العظيم<br>
+    سبحان الله وبحمده، سبحان الله العظيم
+  </div>
+
+  <button onclick="sharePage()">مشاركة الصفحة</button>
+
+  <script>
+    function updateCountdown() {
+      const eventDate = new Date("2025-07-28T00:00:00").getTime(); // تاريخ 1 محرم 1447
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "انتهت الإجازة!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'العد التنازلي لإجازة جامعة أم القرى',
+          url: window.location.href
+        })
+        .then(() => console.log("تمت المشاركة"))
+        .catch((error) => console.error("حدث خطأ", error));
+      } else {
+        alert("جهازك لا يدعم المشاركة التلقائية.");
+      }
+    }
+
+    updateCountdown();
+  </script>
+</body>
+</html>
